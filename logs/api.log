@@ -1,0 +1,20 @@
+2024-07-17 18:52:03.661 [main] INFO  [55] - Starting YiTongDataApiBootstrap using Java 11.0.2 on 192.168.0.114 with PID 8197 (/Users/hanhan.zhang/project/ytdp/ytdp-data-api/target/classes started by hanhan.zhang in /Users/hanhan.zhang/project/ytdp)
+2024-07-17 18:52:03.670 [main] INFO  [638] - The following 1 profile is active: "dev"
+2024-07-17 18:52:04.387 [main] INFO  [36] - start .......
+2024-07-17 18:52:04.730 [main] INFO  [61] - Started YiTongDataApiBootstrap in 1.402 seconds (JVM running for 2.331)
+2024-07-17 18:53:36.756 [main] INFO  [55] - Starting YiTongDataApiBootstrap using Java 11.0.2 on 192.168.0.114 with PID 8218 (/Users/hanhan.zhang/project/ytdp/ytdp-data-api/target/classes started by hanhan.zhang in /Users/hanhan.zhang/project/ytdp)
+2024-07-17 18:53:36.765 [main] INFO  [638] - The following 1 profile is active: "dev"
+2024-07-17 18:53:37.580 [main] INFO  [36] - start .......
+2024-07-17 18:53:37.902 [main] INFO  [61] - Started YiTongDataApiBootstrap in 1.628 seconds (JVM running for 2.669)
+2024-07-17 18:55:44.690 [main] INFO  [55] - Starting YiTongDataApiBootstrap using Java 11.0.2 on 192.168.0.114 with PID 8518 (/Users/hanhan.zhang/project/ytdp/ytdp-data-api/target/classes started by hanhan.zhang in /Users/hanhan.zhang/project/ytdp)
+2024-07-17 18:55:44.699 [main] INFO  [638] - The following 1 profile is active: "dev"
+2024-07-17 18:55:45.393 [main] INFO  [36] - start .......
+2024-07-17 18:55:45.723 [main] INFO  [61] - Started YiTongDataApiBootstrap in 1.345 seconds (JVM running for 2.15)
+2024-07-17 18:56:25.273 [main] INFO  [55] - Starting YiTongDataApiBootstrap using Java 11.0.2 on 192.168.0.114 with PID 8525 (/Users/hanhan.zhang/project/ytdp/ytdp-data-api/target/classes started by hanhan.zhang in /Users/hanhan.zhang/project/ytdp)
+2024-07-17 18:56:25.282 [main] INFO  [638] - The following 1 profile is active: "dev"
+2024-07-17 18:56:26.052 [main] INFO  [36] - start .......
+2024-07-17 18:56:26.348 [main] INFO  [61] - Started YiTongDataApiBootstrap in 1.441 seconds (JVM running for 2.284)
+2024-07-17 18:57:07.631 [main] INFO  [55] - Starting YiTongDataApiBootstrap using Java 11.0.2 on 192.168.0.114 with PID 8545 (/Users/hanhan.zhang/project/ytdp/ytdp-data-api/target/classes started by hanhan.zhang in /Users/hanhan.zhang/project/ytdp)
+2024-07-17 18:57:07.637 [main] INFO  [638] - The following 1 profile is active: "dev"
+2024-07-17 18:57:08.358 [main] INFO  [36] - start .......
+2024-07-17 18:57:08.658 [main] INFO  [61] - Started YiTongDataApiBootstrap in 1.386 seconds (JVM running for 2.271)

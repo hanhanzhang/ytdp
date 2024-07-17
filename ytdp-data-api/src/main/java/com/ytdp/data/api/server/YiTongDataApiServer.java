@@ -19,20 +19,23 @@
 package com.ytdp.data.api.server;
 
 import io.undertow.Undertow;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 @Component
+@Slf4j
 public class YiTongDataApiServer {
 
     private Undertow server;
 
-
     @PostConstruct
     public void start() {
+        log.info("start .......");
         server = Undertow.builder()
+                .setDirectBuffers(true)
                 .build();
     }
 

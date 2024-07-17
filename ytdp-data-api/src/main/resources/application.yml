@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: @profile.active@
+
+
+# log4j2配置
+logging:
+  config: classpath:log4j2.xml

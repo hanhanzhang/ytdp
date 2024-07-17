@@ -18,13 +18,14 @@
 
 package com.ytdp.data.api;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class YiTongDataApiBootstrap {
 
     public static void main(String[] args) {
-
+        SpringApplication.run(YiTongDataApiBootstrap.class, args);
     }
 
 }
