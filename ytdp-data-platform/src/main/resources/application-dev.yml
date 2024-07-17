@@ -9,9 +9,9 @@ spring:
   sql:
     init:
       mode: always
-      schema-locations: classpath*:sql/ytdp_database.sql;classpath*:sql/ytdp_data_share_schema.sql
-      # 配置多个sql文件的分隔符
-      separator: ;
+      schema-locations:
+        - classpath*:sql/ytdp_database.sql
+        - classpath*:sql/ytdp_data_share_schema.sql
       continue-on-error: false
   datasource:
     username: root
