@@ -5,7 +5,7 @@
     <!-- 设置全局变量 -->
     <properties>
         <property name="LOG_HOME">./logs</property>
-        <property name="FILE_NAME">api</property>
+        <property name="FILE_NAME">platform</property>
     </properties>
 
     <!-- Appenders: 定义日志输出目的地, 内容和格式等-->
@@ -55,7 +55,7 @@
     <Loggers>
         <!--name: 打印日志的类的包路径 -->
         <!--additivity: true当前的Logger打印的日志附加到Root, false仅仅打印到RollingFile -->
-        <Logger name="com.ytdp.data.api" level="INFO" additivity="true">
+        <Logger name="com.ytdp.data.platform" level="INFO" additivity="true">
             <AppenderRef ref="RollingFile" />
         </Logger>
         <!--Root: 日志默认打印到控制台 -->

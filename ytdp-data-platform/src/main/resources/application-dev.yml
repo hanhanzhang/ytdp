@@ -1,0 +1,20 @@
+server:
+  port: 9092
+# database config
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2 # 通过浏览器访问H2数据库, http://127.0.0.1:9092/h2
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath*:sql/ytdp_database.sql;classpath*:sql/ytdp_data_share_schema.sql
+      # 配置多个sql文件的分隔符
+      separator: ;
+      continue-on-error: false
+  datasource:
+    username: root
+    password: 123456 #H2默认密码123456
+    url: jdbc:h2:~/ytdp
+    driver-class-name: org.h2.Driver

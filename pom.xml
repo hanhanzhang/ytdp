@@ -12,12 +12,13 @@
     <properties>
         <lombok.version>1.18.34</lombok.version>
         <springboot.version>2.7.18</springboot.version>
+        <mybatis.plugin.version>3.5.7</mybatis.plugin.version>
         <maven.resource.plugin.version>3.3.1</maven.resource.plugin.version>
     </properties>
 
     <modules>
         <module>ytdp-data-api</module>
-        <module>ytdp-data-mange</module>
+        <module>ytdp-data-platform</module>
     </modules>
 
     <dependencies>
@@ -51,6 +52,12 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-log4j2</artifactId>
                 <version>${springboot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis.plugin.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
