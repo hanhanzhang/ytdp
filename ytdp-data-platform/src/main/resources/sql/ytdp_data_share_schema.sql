@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS yt_data_api_meta (
     `id` INT(11) AUTO_INCREMENT PRIMARY KEY,
     `api_name` VARCHAR(32) NOT NULL COMMENT 'API接口名',
     `api_owner` VARCHAR(32) NOT NULL COMMENT 'API接口负责人',
-    `api_status` TINYINT NOT NULL 'API接口状态, 0: 在线, 1: 下线',
+    `api_status` TINYINT NOT NULL COMMENT 'API接口状态, 0: 在线, 1: 下线',
     `api_url` VARCHAR(128) NOT NULL COMMENT 'API请求URL',
     `api_method` VARCHAR(16) NOT NULL COMMENT 'API请求方式, eg: GET、POST',
     `api_desc` VARCHAR(256) NOT NULL COMMENT 'API接口描述',
@@ -33,8 +33,8 @@ CREATE TABLE IF NOT EXISTS yt_data_api_request_cfg (
 CREATE TABLE IF NOT EXISTS yt_data_api_logic_cfg (
     `id` INT(11) AUTO_INCREMENT PRIMARY KEY,
     `api_id` INT(11) NOT NULL COMMENT '数据API接口ID',
-    `api_calc_type` TINYINT NOT NULL COMMENT '数据API接口计算类型, eg: SQL'
-    `api_calc_cfg` VARCHAR NOT NULL COMENT '数据API接口配置, json格式',
+    `api_calc_type` TINYINT NOT NULL COMMENT '数据API接口计算类型, eg: SQL',
+    `api_calc_cfg` VARCHAR(512) NOT NULL COMMENT '数据API接口配置, json格式',
     `create_time` DATETIME NOT NULL COMMENT '创建时间',
     `update_time` DATETIME NOT NULL COMMENT '更新时间',
     UNIQUE INDEX api_id_index (`api_id`)
@@ -44,8 +44,8 @@ CREATE TABLE IF NOT EXISTS yt_data_api_logic_cfg (
 CREATE TABLE IF NOT EXISTS yt_data_api_response_cfg (
     `id` INT(11) AUTO_INCREMENT PRIMARY KEY,
     `api_id` INT(11) NOT NULL COMMENT '数据API接口ID',
-    `res_field` VARCHAR(32) NOT NULL '响应字段名',
-    `res_field_encrypt` TINYINT NOT NULL COMMENT '响应字段名是否加密, 0: 加密, 1: 非加密'
+    `res_field` VARCHAR(32) NOT NULL COMMENT '响应字段名',
+    `res_field_encrypt` TINYINT NOT NULL COMMENT '响应字段名是否加密, 0: 加密, 1: 非加密',
     `create_time` DATETIME NOT NULL COMMENT '创建时间',
     `update_time` DATETIME NOT NULL COMMENT '更新时间',
     INDEX api_id_index (`api_id`)
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS yt_data_application_meta (
     `update_time` DATETIME NOT NULL COMMENT '更新时间',
     UNIQUE INDEX app_name_index (`app_name`),
     UNIQUE INDEX app_key_index (`app_key`),
-    INDEX owner_index (`owner`)
+    INDEX owner_index (`app_owner`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 数据应用已分配的数据API

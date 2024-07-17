@@ -16,18 +16,35 @@
  * limitations under the License.
  */
 
-package com.ytdp.data.platform;
+package com.ytdp.data.platform.entity.share;
 
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.ytdp.data.platform.entity.YiTongObject;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-@SpringBootApplication
-@MapperScan("com.ytdp.data.platform")
-public class YiTongDataPlatformBootstrap {
+@Data
+@EqualsAndHashCode(callSuper = false)
+public class YiTongDataApp extends YiTongObject {
 
-    public static void main(String[] args) {
-        SpringApplication.run(YiTongDataPlatformBootstrap.class, args);
-    }
+    @TableField("id")
+    @TableId(type = IdType.AUTO)
+    private int id;
 
+    @TableField("app_name")
+    private String appName;
+
+    @TableField("app_owner")
+    private String appOwner;
+
+    @TableField("app_key")
+    private String appKey;
+
+    @TableField("app_secret_key")
+    private String appSecretKey;
+
+    @TableField("desc")
+    private String desc;
 }

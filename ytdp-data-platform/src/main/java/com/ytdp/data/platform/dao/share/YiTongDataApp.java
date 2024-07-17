@@ -16,18 +16,9 @@
  * limitations under the License.
  */
 
-package com.ytdp.data.platform;
+package com.ytdp.data.platform.dao.share;
 
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
-@SpringBootApplication
-@MapperScan("com.ytdp.data.platform")
-public class YiTongDataPlatformBootstrap {
-
-    public static void main(String[] args) {
-        SpringApplication.run(YiTongDataPlatformBootstrap.class, args);
-    }
-
+public interface YiTongDataApp extends BaseMapper<com.ytdp.data.platform.entity.share.YiTongDataApp> {
 }
