@@ -16,9 +16,31 @@
  * limitations under the License.
  */
 
-package com.ytdp.data.platform.dao.share;
+package com.ytdp.data.dao.api;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.ytdp.data.entity.api.DataApp;
+import org.apache.ibatis.annotations.Many;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.mapping.FetchType;
 
-public interface YiTongDataApp extends BaseMapper<com.ytdp.data.platform.entity.share.YiTongDataApp> {
+import java.io.Serializable;
+
+public interface DataAppMapper extends BaseMapper<DataApp> {
+
+    @Override
+    @Select("SELECT * FROM yt_data_app WHERE id = #{id}")
+    @Results({
+            @Result(
+                    column = "id",
+                    property = "allocatedApis",
+                    many = @Many(
+                            select = "com.ytdp.data.dao.api.DataAppAllocatedApiMapper.selectByAppId",
+                            fetchType = FetchType.LAZY
+                    )
+            )
+    })
+    DataApp selectById(Serializable id);
 }

@@ -1,5 +1,5 @@
 server:
-  port: 9092
+  port: 9091
 # database config
 spring:
 #  h2:
@@ -11,7 +11,7 @@ spring:
       mode: always
       schema-locations:
         - classpath*:sql/ytdp_database.sql
-        - classpath*:sql/ytdp_data_share_schema.sql
+        - classpath*:sql/ytdp_data_api_schema.sql
       continue-on-error: false
   datasource:
     username: root

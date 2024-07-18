@@ -16,18 +16,21 @@
  * limitations under the License.
  */
 
-package com.ytdp.data.platform;
+package com.ytdp.data.platform.controller.api;
 
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.ytdp.data.platform.annotations.AuditLogRecord;
+import com.ytdp.data.platform.audit.OperationType;
+import com.ytdp.data.platform.audit.SystemResource;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@SpringBootApplication
-@MapperScan("com.ytdp.data.dao")
-public class YiTongDataPlatformBootstrap {
+@RestController
+public class DataApiController {
 
-    public static void main(String[] args) {
-        SpringApplication.run(YiTongDataPlatformBootstrap.class, args);
+    @GetMapping("/dataApi/test")
+    @AuditLogRecord(resource = SystemResource.DATA_API, operationType = OperationType.SELECT, descriptor = "测试")
+    public String test() {
+        return "hello";
     }
 
 }

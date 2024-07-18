@@ -16,18 +16,15 @@
  * limitations under the License.
  */
 
-package com.ytdp.data.platform;
+package com.ytdp.data.dao.api;
 
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.ytdp.data.entity.api.DataAppAllocatedApi;
+import org.apache.ibatis.annotations.Select;
 
-@SpringBootApplication
-@MapperScan("com.ytdp.data.dao")
-public class YiTongDataPlatformBootstrap {
+public interface DataAppAllocatedApiMapper extends BaseMapper<DataAppAllocatedApi> {
 
-    public static void main(String[] args) {
-        SpringApplication.run(YiTongDataPlatformBootstrap.class, args);
-    }
+    @Select("SELECT * FROM yt_data_app_allocated_api WHERE app_id = #{appId}")
+    DataAppAllocatedApi selectByAppId(int appId);
 
 }

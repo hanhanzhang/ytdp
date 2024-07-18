@@ -16,35 +16,23 @@
  * limitations under the License.
  */
 
-package com.ytdp.data.platform.entity.share;
+package com.ytdp.data.platform.annotations;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.ytdp.data.platform.entity.YiTongObject;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import com.ytdp.data.platform.audit.OperationType;
+import com.ytdp.data.platform.audit.SystemResource;
 
-@Data
-@EqualsAndHashCode(callSuper = false)
-public class YiTongDataApp extends YiTongObject {
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-    @TableField("id")
-    @TableId(type = IdType.AUTO)
-    private int id;
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface AuditLogRecord {
 
-    @TableField("app_name")
-    private String appName;
+    SystemResource resource();
 
-    @TableField("app_owner")
-    private String appOwner;
+    OperationType operationType();
 
-    @TableField("app_key")
-    private String appKey;
-
-    @TableField("app_secret_key")
-    private String appSecretKey;
-
-    @TableField("desc")
-    private String desc;
+    String descriptor() default "";
 }

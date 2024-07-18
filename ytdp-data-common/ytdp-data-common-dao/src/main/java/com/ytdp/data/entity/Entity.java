@@ -16,18 +16,21 @@
  * limitations under the License.
  */
 
-package com.ytdp.data.platform;
+package com.ytdp.data.entity;
 
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.baomidou.mybatisplus.annotation.TableField;
+import lombok.Data;
 
-@SpringBootApplication
-@MapperScan("com.ytdp.data.dao")
-public class YiTongDataPlatformBootstrap {
+import java.io.Serializable;
+import java.util.Date;
 
-    public static void main(String[] args) {
-        SpringApplication.run(YiTongDataPlatformBootstrap.class, args);
-    }
+@Data
+public class Entity implements Serializable {
+
+    @TableField("create_time")
+    private Date createTime;
+
+    @TableField("update_time")
+    private Date updateTime;
 
 }

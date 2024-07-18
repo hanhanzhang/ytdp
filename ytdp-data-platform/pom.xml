@@ -42,20 +42,23 @@
             </exclusions>
         </dependency>
 
-        <!-- mybatis  -->
+        <!-- aop -->
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
         <!-- log4j2 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
+
+        <!-- database -->
+        <dependency>
+            <groupId>com.ytdp</groupId>
+            <artifactId>ytdp-data-common-dao</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 

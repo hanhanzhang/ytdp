@@ -20,6 +20,8 @@
     <modules>
         <module>ytdp-data-api</module>
         <module>ytdp-data-platform</module>
+        <module>ytdp-data-common</module>
+        <module>ytdp-data-common/ytdp-data-common-dao</module>
     </modules>
 
     <dependencies>
@@ -52,6 +54,12 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-log4j2</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
                 <version>${springboot.version}</version>
             </dependency>
 

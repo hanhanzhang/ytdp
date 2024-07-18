@@ -16,18 +16,18 @@
  * limitations under the License.
  */
 
-package com.ytdp.data.platform;
+package com.ytdp.data.platform.audit;
 
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import lombok.Getter;
 
-@SpringBootApplication
-@MapperScan("com.ytdp.data.dao")
-public class YiTongDataPlatformBootstrap {
+@Getter
+public enum OperationType {
 
-    public static void main(String[] args) {
-        SpringApplication.run(YiTongDataPlatformBootstrap.class, args);
+    ADD("add"), UPDATE("update"), DELETE("delete"), SELECT("select");
+
+    private final String type;
+
+    OperationType(String type) {
+        this.type = type;
     }
-
 }

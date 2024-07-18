@@ -16,18 +16,30 @@
  * limitations under the License.
  */
 
-package com.ytdp.data.platform;
+package com.ytdp.data.entity.api;
 
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.ytdp.data.entity.Entity;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-@SpringBootApplication
-@MapperScan("com.ytdp.data.dao")
-public class YiTongDataPlatformBootstrap {
+@Data
+@EqualsAndHashCode(callSuper = false)
+@TableName("yt_data_api_security_cfg")
+public class DataApiSecurityConfig extends Entity {
 
-    public static void main(String[] args) {
-        SpringApplication.run(YiTongDataPlatformBootstrap.class, args);
-    }
+    @TableId(value = "id", type = IdType.AUTO)
+    private int apiSecurityConfigId;
 
+    @TableField("api_id")
+    private int apiId;
+
+    @TableField("api_request_limit_period")
+    private String apiRequestLimitPeriod;
+
+    @TableField("api_request_limit_frequency")
+    private int apiRequestLimitFrequency;
 }

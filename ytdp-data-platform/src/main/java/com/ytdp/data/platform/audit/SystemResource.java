@@ -16,19 +16,18 @@
  * limitations under the License.
  */
 
-package com.ytdp.data.platform.entity;
+package com.ytdp.data.platform.audit;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import lombok.Data;
+import lombok.Getter;
 
-import java.time.Instant;
+@Getter
+public enum SystemResource {
 
-@Data
-public class YiTongObject {
+    DATA_API("api");
 
-    @TableField("create_time")
-    private Instant createTime;
+    private final String name;
 
-    @TableField("update_time")
-    private Instant updateTime;
+    SystemResource(String name) {
+        this.name = name;
+    }
 }
