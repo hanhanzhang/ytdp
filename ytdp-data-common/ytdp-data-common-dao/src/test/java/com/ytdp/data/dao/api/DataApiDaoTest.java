@@ -19,10 +19,14 @@
 package com.ytdp.data.dao.api;
 
 import com.baomidou.mybatisplus.test.autoconfigure.MybatisPlusTest;
+import com.ytdp.data.entity.api.DataApp;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.test.annotation.Rollback;
+
+import java.util.Date;
 
 @Slf4j
 @MybatisPlusTest
@@ -33,8 +37,20 @@ public class DataApiDaoTest {
     private DataAppMapper dataAppMapper;
 
     @Test
+    @Rollback(value = false) // 在单测中自动回滚事务, 导致插入成功后再回滚插入动作
     public void testAddDataApp() {
+        DataApp app = new DataApp();
+        app.setAppName("hotel");
+        app.setAppKey("hotel_data");
+        app.setAppSecretKey("hotel_secret_89");
+        app.setAppOwner("郑明");
+        app.setAppStatus(0);
+        app.setCreateTime(new Date());
+        app.setUpdateTime(new Date());
 
+        int ret = dataAppMapper.insert(app);
+
+        log.info("insert result: {}", ret == 1 ? "success" : "failed");
     }
 
 }

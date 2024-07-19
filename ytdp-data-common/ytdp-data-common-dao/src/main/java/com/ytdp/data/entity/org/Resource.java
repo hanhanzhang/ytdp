@@ -16,23 +16,35 @@
  * limitations under the License.
  */
 
-package com.ytdp.data.platform.annotations;
+package com.ytdp.data.entity.org;
 
-import com.ytdp.data.platform.audit.OperationType;
-import com.ytdp.data.platform.audit.OperationResource;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.ytdp.data.entity.Entity;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+@Data
+@EqualsAndHashCode(callSuper = true)
+@TableName("yt_sys_resource")
+public class Resource extends Entity {
 
-@Target(ElementType.METHOD)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface AuditLogRecord {
+    @TableId(value = "id", type = IdType.AUTO)
+    private int resourceId;
 
-    OperationResource resource();
+    @TableField("resource_parent_id")
+    private int resourceParentId;
 
-    OperationType operationType();
+    @TableField("resource_name")
+    private String resourceName;
 
-    String descriptor() default "";
+    @TableField("resource_type")
+    private int resourceType;
+
+    @TableField("resource_path")
+    private String resourcePath;
+
+
 }

@@ -16,18 +16,10 @@
  * limitations under the License.
  */
 
-package com.ytdp.data.platform.audit;
+package com.ytdp.data.dao.org;
 
-import lombok.Getter;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.ytdp.data.entity.org.UserTeam;
 
-@Getter
-public enum SystemResource {
-
-    DATA_API("api");
-
-    private final String name;
-
-    SystemResource(String name) {
-        this.name = name;
-    }
+public interface UserTeamMapper extends BaseMapper<UserTeam> {
 }

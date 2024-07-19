@@ -16,23 +16,35 @@
  * limitations under the License.
  */
 
-package com.ytdp.data.platform.annotations;
+package com.ytdp.data.entity.org;
 
-import com.ytdp.data.platform.audit.OperationType;
-import com.ytdp.data.platform.audit.OperationResource;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.ytdp.data.entity.Entity;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.util.List;
 
-@Target(ElementType.METHOD)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface AuditLogRecord {
+@Data
+@EqualsAndHashCode(callSuper = true)
+@TableName("yt_org_job_group")
+public class JobGroup extends Entity {
 
-    OperationResource resource();
+    @TableId(value = "id", type = IdType.AUTO)
+    private int jobGroupId;
 
-    OperationType operationType();
+    @TableField("job_group_name")
+    private String jobGroupName;
 
-    String descriptor() default "";
+    @TableField("job_group_code")
+    private String jobGroupCode;
+
+    @TableField("job_group_desc")
+    private String jobGroupDesc;
+
+    @TableField(exist = false)
+    private List<Job> jobs;
 }

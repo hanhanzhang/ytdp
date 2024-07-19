@@ -16,23 +16,33 @@
  * limitations under the License.
  */
 
-package com.ytdp.data.platform.annotations;
+package com.ytdp.data.entity.org;
 
-import com.ytdp.data.platform.audit.OperationType;
-import com.ytdp.data.platform.audit.OperationResource;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.ytdp.data.entity.Entity;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.util.List;
 
-@Target(ElementType.METHOD)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface AuditLogRecord {
+@Data
+@EqualsAndHashCode(callSuper = true)
+@TableName("yt_dep_team")
+public class Team extends Entity {
 
-    OperationResource resource();
+    @TableId(value = "id", type = IdType.AUTO)
+    private int teamId;
 
-    OperationType operationType();
+    @TableField("team_name")
+    private String teamName;
 
-    String descriptor() default "";
+    @TableField("team_desc")
+    private String teamDesc;
+
+    @TableField(exist = false)
+    private List<Resource> resources;
+
 }

@@ -16,23 +16,18 @@
  * limitations under the License.
  */
 
-package com.ytdp.data.platform.annotations;
+package com.ytdp.data.platform.audit;
 
-import com.ytdp.data.platform.audit.OperationType;
-import com.ytdp.data.platform.audit.OperationResource;
+import lombok.Getter;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+@Getter
+public enum OperationResource {
 
-@Target(ElementType.METHOD)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface AuditLogRecord {
+    DATA_API("api");
 
-    OperationResource resource();
+    private final String name;
 
-    OperationType operationType();
-
-    String descriptor() default "";
+    OperationResource(String name) {
+        this.name = name;
+    }
 }

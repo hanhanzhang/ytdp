@@ -16,23 +16,15 @@
  * limitations under the License.
  */
 
-package com.ytdp.data.platform.annotations;
+package com.ytdp.data.dao.org;
 
-import com.ytdp.data.platform.audit.OperationType;
-import com.ytdp.data.platform.audit.OperationResource;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.ytdp.data.entity.org.Job;
+import org.apache.ibatis.annotations.Select;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+public interface JobMapper extends BaseMapper<Job> {
 
-@Target(ElementType.METHOD)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface AuditLogRecord {
+    @Select("SELECT * FROM yt_org_job WHERE job_group_id = #{jobGroupId}")
+    Job selectByJobGroupId(int jobGroupId);
 
-    OperationResource resource();
-
-    OperationType operationType();
-
-    String descriptor() default "";
 }
