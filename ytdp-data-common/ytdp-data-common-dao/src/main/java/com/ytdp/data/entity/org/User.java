@@ -36,9 +36,6 @@ public class User extends Entity {
     @TableId(value = "id", type = IdType.AUTO)
     private int userId;
 
-    @TableField("user_id")
-    private int deptId;
-
     @TableField("user_name")
     private String userName;
 

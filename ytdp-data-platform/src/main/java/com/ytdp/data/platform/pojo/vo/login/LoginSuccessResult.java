@@ -16,38 +16,13 @@
  * limitations under the License.
  */
 
-package com.ytdp.data.entity.org;
+package com.ytdp.data.platform.pojo.vo.login;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.ytdp.data.entity.Entity;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-
-import java.util.List;
 
 @Data
-@EqualsAndHashCode(callSuper = false)
-@TableName("yt_org_dept")
-public class Department extends Entity {
+public class LoginSuccessResult implements LoginResult {
 
-    @TableId(value = "id", type = IdType.AUTO)
-    private int deptId;
+    private String token;
 
-    @TableField("dept_parent_id")
-    private int deptParentId;
-
-    @TableField("dept_name")
-    private String deptName;
-
-    @TableField("dept_code")
-    private String deptCode;
-
-    @TableField("dept_sort")
-    private int deptSort;
-
-    @TableField(exist = false)
-    private List<Department> childDepartments;
 }

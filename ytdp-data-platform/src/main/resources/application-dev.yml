@@ -25,3 +25,17 @@ spring:
       minimum-idle: 2                   # 设置最小空闲连接数
       connection-test-query: select 1
       connection-timeout: 20000         # 设置连接超时时间，单位ms
+
+  # redis config
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    client-type: lettuce
+    lettuce:
+      pool:
+        enabled: true
+        max-idle: 8                   # 连接池最大空闲连接数, 默认值8, 负数表示无限量的空闲连接
+        min-idle: 0                   # 连接池最小空闲连接数, 默认值0
+        max-active: 16                # 连接池分配的最大连接数, 默认值8
+        max-wait: -1                  # 连接池耗尽时, 抛出异常前阻塞等待时间, 负数表示无限期等待
+      shutdown-timeout: 100           # 宕机超时时间, 默认100ms
