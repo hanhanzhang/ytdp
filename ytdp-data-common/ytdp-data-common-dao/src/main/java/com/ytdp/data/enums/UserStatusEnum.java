@@ -16,15 +16,22 @@
  * limitations under the License.
  */
 
-package com.ytdp.data.platform.pojo.dto;
+package com.ytdp.data.enums;
 
-import lombok.Data;
+import com.baomidou.mybatisplus.annotation.EnumValue;
+import lombok.Getter;
 
-@Data
-public class Response<T> {
+@Getter
+public enum UserStatusEnum {
 
-    private int code;
+    ON_POST(0, "在职"), OFF_POST(1, "离职");
 
-    private T data;
+    @EnumValue
+    private final int value;
+    private final String desc;
 
+    UserStatusEnum(int value, String desc) {
+        this.value = value;
+        this.desc = desc;
+    }
 }

@@ -33,9 +33,4 @@ public interface ResourceMapper extends BaseMapper<Resource> {
     @Select("SELECT * FROM yt_sys_resource a INNER JOIN yt_role_resource b ON a.id = b.resource_id WHERE b.role_id = #{roleId}")
     List<Resource> selectByRoleId(int roleId);
 
-    @Select("SELECT * FROM yt_sys_resource a " +
-            "INNER JOIN yt_role_resource b ON a.id = b.resource_id " +
-            "INNER JOIN yt_user_role c ON  b.role_id = c.role_id " +
-            "WHERE c.user_id = #{userId}")
-    List<Resource> selectByUserId(int userId);
 }

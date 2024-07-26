@@ -20,7 +20,7 @@ package com.ytdp.data.platform.controller.api;
 
 import com.ytdp.data.platform.annotations.AuditLogRecord;
 import com.ytdp.data.platform.audit.OperationType;
-import com.ytdp.data.platform.audit.OperationResource;
+import com.ytdp.data.platform.audit.OperationChannel;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class DataApiController {
 
     @GetMapping("/dataApi/test")
-    @AuditLogRecord(resource = OperationResource.DATA_API, operationType = OperationType.SELECT, descriptor = "测试")
+    @AuditLogRecord(channel = OperationChannel.DATA_API, operationType = OperationType.SELECT, descriptor = "测试")
     public String test() {
         return "hello";
     }

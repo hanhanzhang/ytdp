@@ -18,7 +18,7 @@
 
 package com.ytdp.data.platform.service.login;
 
-import com.ytdp.data.platform.pojo.dto.Response;
+import com.ytdp.data.platform.pojo.vo.Response;
 import com.ytdp.data.platform.pojo.vo.login.LoginResult;
 
 public interface LoginService {

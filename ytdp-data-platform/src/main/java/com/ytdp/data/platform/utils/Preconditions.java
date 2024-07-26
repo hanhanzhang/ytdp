@@ -16,24 +16,21 @@
  * limitations under the License.
  */
 
-package com.ytdp.data.platform.pojo.dto;
+package com.ytdp.data.platform.utils;
 
-import lombok.Getter;
+public class Preconditions {
 
-@Getter
-public enum ResponseCode {
 
-    SUCCESS(0, "success"),
+    private Preconditions() { }
 
-    FAILURE(1, "failure"),
-
-    SERVER_ERROR(501, "server internal error");
-
-    private final int value;
-    private final String desc;
-
-    ResponseCode(int value, String desc) {
-        this.value = value;
-        this.desc = desc;
+    public static void checkArgument(boolean condition) {
+        checkArgument(condition, "illegal argument.");
     }
+
+    public static void checkArgument(boolean condition, String msg) {
+        if (!condition) {
+            throw new RuntimeException(msg);
+        }
+    }
+
 }

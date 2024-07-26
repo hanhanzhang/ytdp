@@ -18,26 +18,25 @@
 
 package com.ytdp.data.platform.service.login.impl;
 
-import com.ytdp.data.platform.pojo.dto.Response;
+import com.ytdp.data.platform.annotations.AuditLogRecord;
+import com.ytdp.data.platform.audit.OperationChannel;
+import com.ytdp.data.platform.audit.OperationType;
+import com.ytdp.data.platform.pojo.vo.Response;
 import com.ytdp.data.platform.pojo.vo.login.LoginResult;
 import com.ytdp.data.platform.redis.RedisCache;
 import com.ytdp.data.platform.service.login.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Service;
 
 @Service
 public class LoginServiceImpl implements LoginService {
 
     @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
     private RedisCache redisCache;
 
     @Override
+    @AuditLogRecord(channel = OperationChannel.LOGIN, operationType = OperationType.NONE, descriptor = "登录系统")
     public Response<LoginResult> login(String username, String password) {
-
         return null;
     }
 

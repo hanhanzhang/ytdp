@@ -16,18 +16,24 @@
  * limitations under the License.
  */
 
-package com.ytdp.data.platform.audit;
+package com.ytdp.data.platform.pojo.vo;
 
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
-public enum OperationResource {
+@Data
+public class Response<T> {
 
-    DATA_API("api");
+    private int code;
 
-    private final String name;
+    private T data;
 
-    OperationResource(String name) {
-        this.name = name;
+    private Response(int code, T data) {
+        this.code = code;
+        this.data = data;
     }
+
+    public static <T> Response<T> of(int code, T data) {
+        return new Response<>(code, data);
+    }
+
 }

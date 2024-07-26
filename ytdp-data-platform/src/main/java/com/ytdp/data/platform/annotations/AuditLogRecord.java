@@ -19,7 +19,7 @@
 package com.ytdp.data.platform.annotations;
 
 import com.ytdp.data.platform.audit.OperationType;
-import com.ytdp.data.platform.audit.OperationResource;
+import com.ytdp.data.platform.audit.OperationChannel;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -30,7 +30,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface AuditLogRecord {
 
-    OperationResource resource();
+    OperationChannel channel();
 
     OperationType operationType();
 

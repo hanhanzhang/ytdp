@@ -18,7 +18,7 @@
 
 package com.ytdp.data.platform.utils;
 
-import com.ytdp.data.platform.security.UserDetailsWithOrg;
+import com.ytdp.data.entity.org.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
@@ -37,13 +37,13 @@ public class JwtUtils {
     // 设置token过期时间(ms)
     private static final long JWT_TTL = 60 * 60 * 1000L;
     //
-    public static final String USER_DETAILS = "userDetails";
+    private static final String USER_DETAILS = "userDetails";
 
     public JwtUtils() { }
 
-    public static String createJWT(UserDetailsWithOrg userDetails) {
+    public static String createJWT(User user) {
         final Map<String, Object> claims = new HashMap<>();
-        claims.put(USER_DETAILS, userDetails);
+        claims.put(USER_DETAILS, user);
         return Jwts
                 .builder()
                 // 设置秘钥
@@ -71,4 +71,15 @@ public class JwtUtils {
             throw new RuntimeException("非法token", e);
         }
     }
+
+    public static boolean isTokenExpired(Claims claims) {
+        return claims
+                .getExpiration()
+                .before(new Date());
+    }
+
+    public static User getUser(Claims claims) {
+        return claims.get(USER_DETAILS, User.class);
+    }
+
 }

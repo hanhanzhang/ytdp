@@ -23,6 +23,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.ytdp.data.entity.Entity;
+import com.ytdp.data.enums.UserStatusEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -43,7 +44,7 @@ public class User extends Entity {
     private String userPassword;
 
     @TableField("user_status")
-    private int userStatus;
+    private UserStatusEnum userStatus;
 
     @TableField("user_email")
     private String userEmail;
@@ -58,5 +59,5 @@ public class User extends Entity {
     private List<Team> teams;
 
     @TableField(exist = false)
-    private List<Resource> resources;
+    private List<Role> roles;
 }

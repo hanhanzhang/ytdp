@@ -16,14 +16,20 @@
  * limitations under the License.
  */
 
-package com.ytdp.data.platform.security;
+package com.ytdp.data.platform.audit;
 
-import com.ytdp.data.entity.org.Department;
-import org.springframework.security.core.userdetails.UserDetails;
+import lombok.Getter;
 
-public interface UserDetailsWithOrg extends UserDetails {
+@Getter
+public enum OperationChannel {
 
-    // 用户部门信息
-    Department userDepartmentDetails();
+    LOGIN("login"),
 
+    DATA_API("api");
+
+    private final String name;
+
+    OperationChannel(String name) {
+        this.name = name;
+    }
 }

@@ -23,7 +23,7 @@ import lombok.Getter;
 @Getter
 public enum OperationType {
 
-    ADD("add"), UPDATE("update"), DELETE("delete"), SELECT("select");
+    NONE("none"), ADD("add"), UPDATE("update"), DELETE("delete"), SELECT("select");
 
     private final String type;
 

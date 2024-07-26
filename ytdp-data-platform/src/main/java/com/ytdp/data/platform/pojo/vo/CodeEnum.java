@@ -16,24 +16,24 @@
  * limitations under the License.
  */
 
-package com.ytdp.data.platform.controller.login;
+package com.ytdp.data.platform.pojo.vo;
 
-import com.ytdp.data.platform.pojo.vo.Response;
-import com.ytdp.data.platform.pojo.vo.login.LoginResult;
-import com.ytdp.data.platform.service.login.LoginService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.Getter;
 
-@RestController
-public class LoginController {
+@Getter
+public enum CodeEnum {
 
-    @Autowired
-    private LoginService loginService;
+    SUCCESS(0, "success"),
 
-    @PostMapping("/login")
-    public Response<LoginResult> login(String username, String password) {
-        return null;
+    FAILURE(1, "failure"),
+
+    SERVER_ERROR(501, "server internal error");
+
+    private final int value;
+    private final String desc;
+
+    CodeEnum(int value, String desc) {
+        this.value = value;
+        this.desc = desc;
     }
-
 }

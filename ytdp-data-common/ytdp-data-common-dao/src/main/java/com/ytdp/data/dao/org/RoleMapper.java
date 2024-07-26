@@ -22,11 +22,13 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ytdp.data.entity.org.Role;
 import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.mapping.FetchType;
 
 import java.io.Serializable;
+import java.util.List;
 
 public interface RoleMapper extends BaseMapper<Role> {
 
@@ -40,10 +42,15 @@ public interface RoleMapper extends BaseMapper<Role> {
                             property = "resources",
                             many = @Many(
                                     select = "com.ytdp.data.dao.org.ResourceMapper.selectByRoleId",
-                                    fetchType = FetchType.EAGER
+                                    fetchType = FetchType.LAZY
                             )
                     )
             }
     )
     Role selectById(Serializable id);
+
+
+    @Select("SELECT * FROM yt_sys_role a INNER JOIN yt_user_role b ON a.id = b.role_id WHERE b.user_id = #{userId}")
+    @ResultMap(value = "roleResults")
+    List<Role> selectByUserId(int userId);
 }

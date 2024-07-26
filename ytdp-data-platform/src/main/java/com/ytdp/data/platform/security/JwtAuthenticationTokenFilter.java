@@ -18,9 +18,13 @@
 
 package com.ytdp.data.platform.security;
 
+import com.ytdp.data.entity.org.Role;
+import com.ytdp.data.entity.org.User;
 import com.ytdp.data.platform.utils.JwtUtils;
 import io.jsonwebtoken.Claims;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -31,8 +35,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
-import static com.ytdp.data.platform.utils.JwtUtils.USER_DETAILS;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 1. 用户登录成功后携带登录的token, 自定义Jwt Token认证过滤器
@@ -46,23 +50,34 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         // 1. 请求中获取token
-        String token = request.getHeader(TOKEN);
+        String attachToken = request.getHeader(TOKEN);
 
-        // 2. token空则直接放行
-        if (!StringUtils.hasText(token)) {
+        if (!StringUtils.hasText(attachToken)) {
             filterChain.doFilter(request, response);
             return;
         }
 
-        // 3. 解析token
+        // 2. 解析token
+        String token = attachToken.substring(UserLoginSuccessHandler.TOKEN.length());
+        if (!StringUtils.hasText(token)) {
+            filterChain.doFilter(request, response);
+            return;
+        }
         Claims claims = JwtUtils.parseJWT(token);
-        UserDetailsWithOrg userDetails = claims.get(USER_DETAILS, UserDetailsWithOrg.class);
-
-
+        if (JwtUtils.isTokenExpired(claims)) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+        User user = JwtUtils.getUser(claims);
+        List<GrantedAuthority> authorities = user
+                .getRoles()
+                .stream()
+                .map(Role::getRoleName)
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
         // 用户认证保存到SecurityContextHolder, 用于后续访问控制和授权操作
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, null);
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user, null, authorities);
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-
         filterChain.doFilter(request, response);
     }
 }

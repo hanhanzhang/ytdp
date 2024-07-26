@@ -54,9 +54,9 @@ public interface UserMapper extends BaseMapper<User> {
                     ),
                     @Result(
                             column = "id",
-                            property = "resources",
+                            property = "roles",
                             many = @Many(
-                                    select = "com.ytdp.data.dao.org.ResourceMapper.selectByUserId",
+                                    select = "com.ytdp.data.dao.org.RoleMapper.selectByUserId",
                                     fetchType = FetchType.EAGER
                             )
                     )

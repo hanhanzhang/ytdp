@@ -19,49 +19,89 @@
 package com.ytdp.data.platform.config;
 
 import com.ytdp.data.platform.security.JwtAuthenticationTokenFilter;
+import com.ytdp.data.platform.security.UserLoginAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
 
 @Configuration
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+@EnableWebSecurity
+@EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
+public class SecurityConfiguration {
 
     @Autowired
-    private JwtAuthenticationTokenFilter authenticationTokenFilter;
+    private AccessDecisionManager accessDecisionManager;
+
+    @Autowired
+    private AccessDeniedHandler accessDeniedHandler;
+
+    @Autowired
+    private AuthenticationEntryPoint authenticationEntryPoint;
+
+
+    @Autowired
+    private UserLoginAuthenticationFilter loginAuthenticationFilter;
+    @Autowired
+    private JwtAuthenticationTokenFilter tokenAuthenticationFilter;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         // 关闭csrf
-        http.csrf().disable()
+        http
+                // 打开Spring Security的跨域
+                .cors()
+                .and()
+                .csrf(AbstractHttpConfigurer::disable)
                 //
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 // 定义请求授权规则
                 .authorizeRequests()
-                // 登录接口: 允许匿名访问
-                .antMatchers("/login").anonymous()
-                // 除上述接口外其他请求都需要鉴权认证
-                .anyRequest().authenticated();
+                // 无需鉴权访问:
+                .antMatchers("/login/*", "/error").permitAll()
+                .antMatchers("/img/**").permitAll()
+                .antMatchers("/*.html").permitAll()
+                .antMatchers("/css/**").permitAll()
+                .antMatchers("/js/**").permitAll()
+                // 除上面外的所有请求全部需要鉴权认证
+                .anyRequest().authenticated()
+                // 访问决策器
+                .accessDecisionManager(accessDecisionManager)
+                .and()
+                // 未登录与权限不足异常处理器
+                .exceptionHandling()
+                .accessDeniedHandler(accessDeniedHandler)
+                .authenticationEntryPoint(authenticationEntryPoint)
+                .and()
+                // 添加自定义登录过滤器(指定拦截的登录URL)
+                .addFilterAfter(loginAuthenticationFilter, AbstractPreAuthenticatedProcessingFilter.class)
+                .addFilterBefore(tokenAuthenticationFilter, UserLoginAuthenticationFilter.class);
 
-        // 添加token认证
-        http.addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        return http.build();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+        return configuration.getAuthenticationManager();
     }
 }
