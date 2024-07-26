@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS yt_sys_resource (
     `id` INT(11) AUTO_INCREMENT PRIMARY KEY,
     `resource_name` VARCHAR(64) COMMENT '资源名称',
     `resource_parent_id` INT(11) DEFAULT -1 COMMENT '父资源',
-    `resource_type` TINYINT NOT NULL COMMENT '资源类型, 0: 页面, 1: 菜单, 2: 按钮',
+    `resource_type` TINYINT NOT NULL COMMENT '资源类型, 0: 菜单, 1: 菜单页面, 2: 菜单页面动作资源',
     `resource_path` VARCHAR(128) NOT NULL COMMENT '资源地址',
     `create_time` DATETIME NOT NULL COMMENT '创建时间',
     `update_time` DATETIME NOT NULL COMMENT '更新时间',

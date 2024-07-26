@@ -23,6 +23,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.ytdp.data.entity.Entity;
+import com.ytdp.data.enums.PermisionResourceTypeEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -41,7 +42,7 @@ public class Resource extends Entity {
     private String resourceName;
 
     @TableField("resource_type")
-    private int resourceType;
+    private PermisionResourceTypeEnum resourceType;
 
     @TableField("resource_path")
     private String resourcePath;
