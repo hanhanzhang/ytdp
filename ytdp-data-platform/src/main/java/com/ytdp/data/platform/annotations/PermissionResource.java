@@ -16,21 +16,25 @@
  * limitations under the License.
  */
 
-package com.ytdp.data.platform;
+package com.ytdp.data.platform.annotations;
 
-import com.ytdp.data.platform.bootstrap.YiTongApplicationContextInitializer;
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.ytdp.data.enums.PermisionResourceTypeEnum;
 
-@SpringBootApplication
-@MapperScan("com.ytdp.data.dao")
-public class YiTongDataPlatformBootstrap {
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-    public static void main(String[] args) {
-        SpringApplication app = new SpringApplication(YiTongDataPlatformBootstrap.class);
-        app.addInitializers(new YiTongApplicationContextInitializer());
-        app.run(args);
-    }
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface PermissionResource {
+
+    String key();
+
+    String parent() default "";
+
+    String name();
+
+    PermisionResourceTypeEnum type();
 
 }
