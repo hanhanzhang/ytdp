@@ -19,12 +19,34 @@
 package com.ytdp.data.dao.org;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.ytdp.data.entity.org.Job;
+import com.ytdp.data.entity.org.Post;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
-public interface JobMapper extends BaseMapper<Job> {
+import java.io.Serializable;
 
-    @Select("SELECT * FROM yt_org_job WHERE job_group_id = #{jobGroupId}")
-    Job selectByJobGroupId(int jobGroupId);
+public interface PostMapper extends BaseMapper<Post> {
 
+    @Select("SELECT * FROM yt_org_post WHERE id = #{id}")
+    @Results(
+            id = "postResults",
+            value = {
+                    @Result(
+                            column = "id",
+                            property = "postId"
+                    )
+            }
+    )
+    @Override
+    Post selectById(Serializable id);
+
+    @Select("SELECT * FROM yt_org_post WHERE post_group_id = #{jobGroupId}")
+    @ResultMap("postResults")
+    Post selectByPostGroupId(int postGroupId);
+
+    @Select("SELECT * FROM yt_org_post a INNER JOIN yt_user_post b on a.id = b.post_id WHERE b.user_id = #{userId}")
+    @ResultMap("postResults")
+    Post selectByUserId(int userId);
 }

@@ -19,7 +19,7 @@
 package com.ytdp.data.dao.org;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.ytdp.data.entity.org.JobGroup;
+import com.ytdp.data.entity.org.PostGroup;
 import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
@@ -28,20 +28,24 @@ import org.apache.ibatis.mapping.FetchType;
 
 import java.io.Serializable;
 
-public interface JobGroupMapper extends BaseMapper<JobGroup> {
+public interface PostGroupMapper extends BaseMapper<PostGroup> {
 
     @Override
-    @Select("SELECT * FROM yt_org_job_group WHERE id = #{id}")
+    @Select("SELECT * FROM yt_org_post_group WHERE id = #{id}")
     @Results({
-           @Result(
+            @Result(
+                    column = "id",
+                    property = "postGroupId"
+            ),
+            @Result(
                    column = "id",
-                   property = "jobs",
+                   property = "posts",
                    many = @Many(
-                           select = "com.ytdp.data.dao.org.JobMapper.selectByJobGroupId",
+                           select = "com.ytdp.data.dao.org.PostMapper.selectByPostGroupId",
                            fetchType = FetchType.EAGER
                    )
            )
     })
-    JobGroup selectById(Serializable id);
+    PostGroup selectById(Serializable id);
 
 }

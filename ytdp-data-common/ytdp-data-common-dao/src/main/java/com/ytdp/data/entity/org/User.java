@@ -56,6 +56,9 @@ public class User extends Entity {
     private Department department;
 
     @TableField(exist = false)
+    private Post post;
+
+    @TableField(exist = false)
     private List<Team> teams;
 
     @TableField(exist = false)

@@ -18,7 +18,7 @@
 
 package com.ytdp.data.platform.annotations;
 
-import com.ytdp.data.enums.PermisionResourceTypeEnum;
+import com.ytdp.data.enums.PermissionTypeEnum;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -35,6 +35,6 @@ public @interface PermissionResource {
 
     String name();
 
-    PermisionResourceTypeEnum type();
+    PermissionTypeEnum type();
 
 }

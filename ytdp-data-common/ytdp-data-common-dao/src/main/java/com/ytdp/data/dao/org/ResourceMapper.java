@@ -22,12 +22,15 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ytdp.data.entity.org.Resource;
 import org.apache.ibatis.annotations.Select;
 
+import java.io.Serializable;
 import java.util.List;
 
 public interface ResourceMapper extends BaseMapper<Resource> {
 
+    @Override
+    Resource selectById(Serializable id);
 
-    @Select("SELECT * FROM yt_sys_resource a INNER JOIN yt_team_resource b ON a.id = b.resource_id WHERE b.team_id = #{teamId} AND resource_type = 0")
+    @Select("SELECT * FROM yt_sys_resource a INNER JOIN yt_team_resource b ON a.id = b.resource_id WHERE b.team_id = #{teamId} AND permission_type = 0")
     List<Resource> selectByTeamId(int teamId);
 
     @Select("SELECT * FROM yt_sys_resource a INNER JOIN yt_role_resource b ON a.id = b.resource_id WHERE b.role_id = #{roleId}")

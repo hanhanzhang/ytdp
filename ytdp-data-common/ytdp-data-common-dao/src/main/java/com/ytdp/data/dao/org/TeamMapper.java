@@ -39,6 +39,10 @@ public interface TeamMapper extends BaseMapper<Team> {
             value = {
                     @Result(
                             column = "id",
+                            property = "teamId"
+                    ),
+                    @Result(
+                            column = "id",
                             property = "resources",
                             many = @Many(
                                     select = "com.ytdp.data.dao.org.ResourceMapper.selectByTeamId",

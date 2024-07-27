@@ -10,13 +10,15 @@ spring:
     init:
       mode: always
       schema-locations:
-        - classpath*:sql/ytdp_database.sql
+        - classpath*:sql/ytdp.sql
+        - classpath*:sql/ytdp_org_schema.sql
         - classpath*:sql/ytdp_data_api_schema.sql
+
       continue-on-error: false
   datasource:
     username: root
     password: 123456
-    url: jdbc:mysql://localhost:3306/ytdp?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://localhost:3306?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     driver-class-name: com.mysql.jdbc.Driver
     hikari:
       auto-commit: true                 # 设置事务自动提交

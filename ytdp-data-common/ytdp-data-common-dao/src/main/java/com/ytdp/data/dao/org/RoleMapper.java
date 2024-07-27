@@ -39,6 +39,10 @@ public interface RoleMapper extends BaseMapper<Role> {
             value = {
                     @Result(
                             column = "id",
+                            property = "roleId"
+                    ),
+                    @Result(
+                            column = "id",
                             property = "resources",
                             many = @Many(
                                     select = "com.ytdp.data.dao.org.ResourceMapper.selectByRoleId",

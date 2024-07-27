@@ -26,25 +26,18 @@ import com.ytdp.data.entity.Entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.util.List;
-
 @Data
 @EqualsAndHashCode(callSuper = true)
-@TableName("yt_org_job_group")
-public class JobGroup extends Entity {
+@TableName("yt_user_post")
+public class UserPost extends Entity {
 
     @TableId(value = "id", type = IdType.AUTO)
-    private int jobGroupId;
+    private int id;
 
-    @TableField("job_group_name")
-    private String jobGroupName;
+    @TableField("user_id")
+    private int userId;
 
-    @TableField("job_group_code")
-    private String jobGroupCode;
+    @TableField("post_id")
+    private int postId;
 
-    @TableField("job_group_desc")
-    private String jobGroupDesc;
-
-    @TableField(exist = false)
-    private List<Job> jobs;
 }

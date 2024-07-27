@@ -22,7 +22,7 @@ import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.Getter;
 
 @Getter
-public enum PermisionResourceTypeEnum {
+public enum PermissionTypeEnum {
 
     MENU(0, "菜单资源"),
 
@@ -34,7 +34,7 @@ public enum PermisionResourceTypeEnum {
     private final int value;
     private final String desc;
 
-    PermisionResourceTypeEnum(int value, String desc) {
+    PermissionTypeEnum(int value, String desc) {
         this.value = value;
         this.desc = desc;
     }

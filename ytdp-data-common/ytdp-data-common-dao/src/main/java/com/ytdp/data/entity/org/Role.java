@@ -23,6 +23,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.ytdp.data.entity.Entity;
+import com.ytdp.data.enums.RoleStatusEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -43,7 +44,7 @@ public class Role extends Entity {
     private int roleSort;
 
     @TableField("role_status")
-    private int roleStatus;
+    private RoleStatusEnum roleStatus;
 
     @TableField("role_creator")
     private String roleCreator;

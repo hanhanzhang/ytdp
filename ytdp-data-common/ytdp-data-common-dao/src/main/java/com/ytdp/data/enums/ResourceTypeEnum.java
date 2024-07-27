@@ -16,31 +16,24 @@
  * limitations under the License.
  */
 
-package com.ytdp.data.entity.org;
+package com.ytdp.data.enums;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.ytdp.data.entity.Entity;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import com.baomidou.mybatisplus.annotation.EnumValue;
+import lombok.Getter;
 
-@Data
-@EqualsAndHashCode(callSuper = true)
-@TableName("yt_org_job")
-public class Job extends Entity {
+@Getter
+public enum ResourceTypeEnum {
 
-    @TableId(value = "id", type = IdType.AUTO)
-    private int jobId;
+    SYSTEM(0, "系统资源"),
+    COMPUTE(1, "计算资源"),
+    STORAGE(2, "存储资源");
 
-    @TableField("job_group_id")
-    private int jobGroupId;
+    @EnumValue
+    private final int value;
+    private final String desc;
 
-    @TableField("job_name")
-    private String jobName;
-
-    @TableField("job_code")
-    private String jobCode;
-
+    ResourceTypeEnum(int value, String desc) {
+        this.value = value;
+        this.desc = desc;
+    }
 }

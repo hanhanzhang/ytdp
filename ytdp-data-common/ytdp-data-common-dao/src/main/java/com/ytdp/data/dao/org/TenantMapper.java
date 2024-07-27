@@ -37,6 +37,10 @@ public interface TenantMapper extends BaseMapper<Tenant> {
             value = {
                     @Result(
                             column = "id",
+                            property = "tenantId"
+                    ),
+                    @Result(
+                            column = "id",
                             property = "teams",
                             many = @Many(
                                     select = "com.ytdp.data.dao.org.TeamMapper.selectByTenantId",

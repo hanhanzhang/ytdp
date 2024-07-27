@@ -16,32 +16,22 @@
  * limitations under the License.
  */
 
-package com.ytdp.data.entity.org;
+package com.ytdp.data.enums;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.ytdp.data.entity.Entity;
-import com.ytdp.data.enums.ResourceTypeEnum;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import com.baomidou.mybatisplus.annotation.EnumValue;
+import lombok.Getter;
 
-@Data
-@EqualsAndHashCode(callSuper = true)
-@TableName("yt_team_resource")
-public class TeamResource extends Entity {
+@Getter
+public enum RoleStatusEnum {
 
-    @TableId(value = "id", type = IdType.AUTO)
-    private int id;
+    ENABLE(0, "可用"), DISABLE(1, "禁用");
 
-    @TableField("team_id")
-    private int teamId;
+    @EnumValue
+    private final int value;
+    private final String desc;
 
-    @TableField("resource_id")
-    private int resourceId;
-
-    @TableField("resource_type")
-    private ResourceTypeEnum resourceType;
-
+    RoleStatusEnum(int value, String desc) {
+        this.value = value;
+        this.desc = desc;
+    }
 }

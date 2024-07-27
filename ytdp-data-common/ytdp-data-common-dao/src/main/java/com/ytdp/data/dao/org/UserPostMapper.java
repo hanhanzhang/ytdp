@@ -16,32 +16,10 @@
  * limitations under the License.
  */
 
-package com.ytdp.data.entity.org;
+package com.ytdp.data.dao.org;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.ytdp.data.entity.Entity;
-import com.ytdp.data.enums.ResourceTypeEnum;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.ytdp.data.entity.org.UserPost;
 
-@Data
-@EqualsAndHashCode(callSuper = true)
-@TableName("yt_team_resource")
-public class TeamResource extends Entity {
-
-    @TableId(value = "id", type = IdType.AUTO)
-    private int id;
-
-    @TableField("team_id")
-    private int teamId;
-
-    @TableField("resource_id")
-    private int resourceId;
-
-    @TableField("resource_type")
-    private ResourceTypeEnum resourceType;
-
+public interface UserPostMapper extends BaseMapper<UserPost> {
 }

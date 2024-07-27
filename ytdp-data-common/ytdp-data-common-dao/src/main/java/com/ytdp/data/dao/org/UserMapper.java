@@ -38,9 +38,21 @@ public interface UserMapper extends BaseMapper<User> {
             value = {
                     @Result(
                             column = "id",
+                            property = "userId"
+                    ),
+                    @Result(
+                            column = "id",
                             property = "department",
                             one = @One(
                                     select = "com.ytdp.data.dao.org.DepartmentMapper.selectByUserId",
+                                    fetchType = FetchType.EAGER
+                            )
+                    ),
+                    @Result(
+                            column = "id",
+                            property = "post",
+                            one = @One(
+                                    select = "com.ytdp.data.dao.org.PostMapper.selectByUserId",
                                     fetchType = FetchType.EAGER
                             )
                     ),

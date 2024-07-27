@@ -37,9 +37,13 @@ public interface DepartmentMapper extends BaseMapper<Department> {
             value = {
                     @Result(
                             column = "id",
+                            property = "deptId"
+                    ),
+                    @Result(
+                            column = "id",
                             property = "childDepartments",
                             many = @Many(
-                                    select = "com.ytdp.data.dao.org.DeptMapper.selectByParentId",
+                                    select = "com.ytdp.data.dao.org.DepartmentMapper.selectByParentId",
                                     fetchType = FetchType.EAGER
                             )
                     )

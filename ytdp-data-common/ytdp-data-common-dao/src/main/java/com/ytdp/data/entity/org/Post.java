@@ -23,25 +23,24 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.ytdp.data.entity.Entity;
-import com.ytdp.data.enums.ResourceTypeEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@TableName("yt_team_resource")
-public class TeamResource extends Entity {
+@TableName("yt_org_post")
+public class Post extends Entity {
 
     @TableId(value = "id", type = IdType.AUTO)
-    private int id;
+    private int postId;
 
-    @TableField("team_id")
-    private int teamId;
+    @TableField("post_group_id")
+    private int postGroupId;
 
-    @TableField("resource_id")
-    private int resourceId;
+    @TableField("post_name")
+    private String postName;
 
-    @TableField("resource_type")
-    private ResourceTypeEnum resourceType;
+    @TableField("post_code")
+    private String postCode;
 
 }
