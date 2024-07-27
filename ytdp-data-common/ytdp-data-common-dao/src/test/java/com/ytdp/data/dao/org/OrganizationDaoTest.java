@@ -31,6 +31,11 @@ import com.ytdp.data.entity.org.TeamResource;
 import com.ytdp.data.entity.org.TeamTenant;
 import com.ytdp.data.entity.org.Tenant;
 import com.ytdp.data.entity.org.TenantDepartment;
+import com.ytdp.data.entity.org.User;
+import com.ytdp.data.entity.org.UserDepartment;
+import com.ytdp.data.entity.org.UserPost;
+import com.ytdp.data.entity.org.UserRole;
+import com.ytdp.data.entity.org.UserTeam;
 import com.ytdp.data.enums.PermissionTypeEnum;
 import com.ytdp.data.enums.RoleStatusEnum;
 import com.ytdp.data.enums.ResourceTypeEnum;
@@ -76,6 +81,17 @@ public class OrganizationDaoTest {
     private RoleResourceMapper roleResourceMapper;
     @Autowired
     private TeamResourceMapper teamResourceMapper;
+
+    @Autowired
+    private UserMapper userMapper;
+    @Autowired
+    private UserDepartmentMapper userDepartmentMapper;
+    @Autowired
+    private UserPostMapper userPostMapper;
+    @Autowired
+    private UserTeamMapper userTeamMapper;
+    @Autowired
+    private UserRoleMapper userRoleMapper;
 
     @Test
     @Rollback(value = true)
@@ -169,6 +185,7 @@ public class OrganizationDaoTest {
     }
 
     @Test
+    @Rollback(value = true)
     public void testSecurityMapper() {
         // 角色
         Role role = new Role();
@@ -235,6 +252,58 @@ public class OrganizationDaoTest {
 
     @Test
     public void testUserMapper() {
+        User user = new User();
+        user.setUserName("super.zhang");
+        user.setUserPassword("123456");
+        user.setUserEmail("zhang@163.com");
+        user.setUserPhone(18762393936L);
+        userMapper.insert(user);
 
+        testSecurityMapper();
+
+        // 分配部门
+        LambdaQueryWrapper<Department> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Department::getDeptCode, "infra");
+        Department department = departmentMapper.selectOne(queryWrapper);
+
+        UserDepartment userDepartment = new UserDepartment();
+        userDepartment.setUserId(user.getUserId());
+        userDepartment.setDeptId(department.getDeptId());
+        userDepartmentMapper.insert(userDepartment);
+
+        // 分配职位
+        testPostMapper();
+        LambdaQueryWrapper<Post> postQueryWrapper = new LambdaQueryWrapper<>();
+        postQueryWrapper.eq(Post::getPostName, "数据开发");
+        Post post = postMapper.selectOne(postQueryWrapper);
+
+        UserPost userPost = new UserPost();
+        userPost.setUserId(user.getUserId());
+        userPost.setPostId(post.getPostId());
+        userPostMapper.insert(userPost);
+
+        // 分配项目
+        LambdaQueryWrapper<Team> teamQueryWrapper = new LambdaQueryWrapper<>();
+        teamQueryWrapper.eq(Team::getTeamName, "infra_data");
+        Team team = teamMapper.selectOne(teamQueryWrapper);
+
+        UserTeam userTeam = new UserTeam();
+        userTeam.setUserId(user.getUserId());
+        userTeam.setTeamId(team.getTeamId());
+        userTeamMapper.insert(userTeam);
+
+        // 分配角色
+        LambdaQueryWrapper<Role> roleQueryWrapper = new LambdaQueryWrapper<>();
+        roleQueryWrapper.eq(Role::getRoleName, "系统管理员");
+        Role role = roleMapper.selectOne(roleQueryWrapper);
+
+        UserRole userRole = new UserRole();
+        userRole.setUserId(user.getUserId());
+        userRole.setRoleId(role.getRoleId());
+        userRoleMapper.insert(userRole);
+
+        // 查询用户
+        User selectUser = userMapper.selectById(user.getUserId());
+        Assertions.assertEquals(user.getUserName(), selectUser.getUserName());
     }
 }

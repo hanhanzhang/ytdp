@@ -50,7 +50,7 @@ public class User extends Entity {
     private String userEmail;
 
     @TableField("user_phone")
-    private int userPhone;
+    private long userPhone;
 
     @TableField(exist = false)
     private Department department;

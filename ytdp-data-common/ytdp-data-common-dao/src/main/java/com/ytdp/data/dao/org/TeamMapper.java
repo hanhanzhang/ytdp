@@ -57,5 +57,6 @@ public interface TeamMapper extends BaseMapper<Team> {
     List<Team> selectByTenantId(int tenantId);
 
     @Select("SELECT * FROM yt_dep_team a INNER JOIN yt_user_team b ON a.id = b.team_id WHERE b.user_id = #{userId}")
+    @ResultMap("teamResults")
     List<Team> selectByUserId(int userId);
 }
